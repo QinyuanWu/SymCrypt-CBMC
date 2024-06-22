@@ -6,8 +6,8 @@
  */
 
 /**
- * @file SymCryptSha512_harness.c
- * @brief Implements the proof harness for SymCryptSha512 function.
+ * @file SymCryptSha1_harness.c
+ * @brief Implements the proof harness for SymCryptSha1 function.
  */
 
 /*
@@ -28,14 +28,14 @@ void harness(void)
 {
     SIZE_T cbData; // unconstrained value
     PBYTE pbData;
-    BYTE abResult[SYMCRYPT_SHA512_RESULT_SIZE];
+    BYTE abResult[SYMCRYPT_SHA1_RESULT_SIZE];
 
-    _CRPOVER_assume(cbData <= 1024);
+    _CPOVER_assume(cbData <= 1024);
     pbData = malloc( cbData );
 
     _CPROVER_assume(pbData != NULL);
 
-    SymCryptSha512( pbData, cbData, abResult );
+    SymCryptSha1( pbData, cbData, abResult );
 
     free(pbData);
 }

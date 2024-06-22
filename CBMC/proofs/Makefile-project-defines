@@ -1,0 +1,50 @@
+# -*- mode: makefile -*-
+# The first line sets the emacs major mode to Makefile
+
+################################################################
+# Use this file to give project-specific definitions of the command
+# line arguments to pass to CBMC tools like goto-cc to build the goto
+# binaries and cbmc to do the property and coverage checking.
+#
+# Use this file to override most default definitions of variables in
+# Makefile.common.
+################################################################
+
+# Flags to pass to goto-cc for compilation (typically those passed to gcc -c)
+# COMPILE_FLAGS =
+
+# Flags to pass to goto-cc for linking (typically those passed to gcc)
+# LINK_FLAGS =
+
+# Flag to pass to goto-cc to make all static symbols globally visible. Leave it
+# unset or set it to --export-file-local-symbols to enable this behavior. Else,
+# selectively enable access to such symbols via each proof's Makefile.
+EXPORT_FILE_LOCAL_SYMBOLS =
+
+CBMC_FLAG_MALLOC_MAY_FAIL =
+CBMC_FLAG_MALLOC_FAIL_NULL =
+CBMC_FLAG_BOUNDS_CHECK ?= --bounds-check
+CBMC_FLAG_CONVERSION_CHECK ?= --conversion-check
+CBMC_FLAG_MEMORY_LEAK_CHECK ?= --memory-leak-check
+CBMC_FLAG_MEMORY_CLEANUP_CHECK ?= --memory-cleanup-check
+CBMC_FLAG_DIV_BY_ZERO_CHECK =
+CBMC_FLAG_FLOAT_OVERFLOW_CHECK =
+CBMC_FLAG_NAN_CHECK ?= --nan-check
+CBMC_FLAG_POINTER_CHECK ?= --pointer-check
+CBMC_FLAG_POINTER_OVERFLOW_CHECK ?= --pointer-overflow-check
+CBMC_FLAG_POINTER_PRIMITIVE_CHECK ?= --pointer-primitive-check
+CBMC_FLAG_SIGNED_OVERFLOW_CHECK =
+CBMC_FLAG_UNDEFINED_SHIFT_CHECK ?= --undefined-shift-check
+CBMC_FLAG_UNSIGNED_OVERFLOW_CHECK =
+CBMC_FLAG_UNWINDING_ASSERTIONS ?= --unwinding-assertions
+# Preprocessor include paths -I...
+# Consider adding
+     INCLUDES += -I$(SRCDIR)/inc
+	 
+# You will want to decide what order that comes in relative to the other
+# include directories in your project.
+#
+# INCLUDES =
+
+# Preprocessor definitions -D...
+# DEFINES =

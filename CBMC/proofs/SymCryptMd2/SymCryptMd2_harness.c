@@ -6,8 +6,8 @@
  */
 
 /**
- * @file SymCryptSha256_harness.c
- * @brief Implements the proof harness for SymCryptSha256 function.
+ * @file SymCryptMd2_harness.c
+ * @brief Implements the proof harness for SymCryptMd2 function.
  */
 
 /*
@@ -18,27 +18,27 @@
 #include <stdlib.h>
 #include "symcrypt.h"
 
+
+SYMCRYPT_ENVIRONMENT_LINUX_USERMODE
 /**
  * @brief Starting point for formal analysis
  * 
  */
-SYMCRYPT_ENVIRONMENT_LINUX_USERMODE
-
 void harness(void)
 {
     SIZE_T cbData; // unconstrained value
     PBYTE pbData;
-    BYTE abResult[SYMCRYPT_SHA256_RESULT_SIZE];
-
-    __CPROVER_assume(cbData <= 1024);
+    BYTE abResult[SYMCRYPT_MD2_RESULT_SIZE];
+    __CPROVER_assume(cbData <= 8);
     pbData = malloc( cbData );
 
     __CPROVER_assume(pbData != NULL);
 
-    SymCryptSha256( pbData, cbData, abResult );
+    SymCryptMd2( pbData, cbData, abResult );
 
     free(pbData);
 }
+
 
 VOID
 SYMCRYPT_CALL

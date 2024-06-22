@@ -1,0 +1,7 @@
+{ "expected-missing-functions":
+  [
+
+  ],
+  "proof-name": "SymCryptSha3_256",
+  "proof-root": "CBMC/proofs"
+}

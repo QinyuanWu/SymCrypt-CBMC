@@ -1270,6 +1270,11 @@ SymCryptSha256AppendBlocks_shani(
                             SIZE_T                              cbData,
     _Out_                   SIZE_T                            * pcbRemaining )
 {
+    __CPROVER_assume( pbData != NULL );
+    __CPROVER_assume( __CPROVER_r_ok( pbData, cbData ) );
+    __CPROVER_assume( pChain != NULL );
+    __CPROVER_assume( pcbRemaining != NULL );
+
     const __m128i BYTE_REVERSE_32 = _mm_set_epi8( 12, 13, 14, 15, 8, 9, 10, 11, 4, 5, 6, 7, 0, 1, 2, 3 );
 
     // Our chain state is in order A, B, ..., H.
@@ -1282,6 +1287,7 @@ SymCryptSha256AppendBlocks_shani(
     __m128i CDGH = _mm_shuffle_epi32( HGDC, 0x1b );                 // (C, D, G, H)
 
     while( cbData >= 64 )
+    __CPROVER_loop_invariant( cbData <= __CPROVER_loop_entry( cbData ) )
     {
         // Save the current state for the feed-forward later
         __m128i ABEF_start = ABEF;

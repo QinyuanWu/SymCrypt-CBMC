@@ -2,6 +2,7 @@
 /build.resolve
 build.timehistory
 build.*.time
+/build
 
 # Build temporary files
 _objects.mac
@@ -79,7 +80,7 @@ CMakeCache.txt
 **/cmake_install.*
 
 # Makefiles from CMake
-Makefile
+
 
 # Local Guardian configuration
 .gdn
