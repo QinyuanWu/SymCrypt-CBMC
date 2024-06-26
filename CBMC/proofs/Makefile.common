@@ -435,7 +435,7 @@ CODE_CONTRACTS := $(CHECK_FUNCTION_CONTRACTS)$(USE_FUNCTION_CONTRACTS)$(APPLY_LO
 # Proof writers may also apply function contracts using the Dynamic Frame
 # Condition Checking (DFCC) mode. For more information on DFCC,
 # please see https://diffblue.github.io/cbmc/contracts-dev-spec-dfcc.html.
-USE_DYNAMIC_FRAMES ?=
+USE_DYNAMIC_FRAMES ?= --dfcc
 ifdef USE_DYNAMIC_FRAMES
   ifneq ($(strip $(USE_DYNAMIC_FRAMES)),)
     CBMC_USE_DYNAMIC_FRAMES := $(CBMC_OPT_CONFIG_LIBRARY) --dfcc $(HARNESS_ENTRY) $(CBMC_CHECK_FUNCTION_CONTRACTS_REC)
@@ -513,8 +513,8 @@ COMMA :=,
 ################################################################
 # Set C compiler defines
 
-CBMCFLAGS += --object-bits $(CBMC_OBJECT_BITS)
-COMPILE_FLAGS += --object-bits $(CBMC_OBJECT_BITS)
+#CBMCFLAGS += --object-bits $(CBMC_OBJECT_BITS)
+#COMPILE_FLAGS += --object-bits $(CBMC_OBJECT_BITS)
 
 DEFINES += -DCBMC=1
 DEFINES += -DCBMC_OBJECT_BITS=$(CBMC_OBJECT_BITS)
