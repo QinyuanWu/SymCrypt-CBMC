@@ -30,12 +30,33 @@ void harness(void)
     PBYTE pbData;
     BYTE abResult[SYMCRYPT_MD4_RESULT_SIZE];
 
-    _CRPOVER_assume(cbData <= 1024);
+    __CPROVER_assume(cbData <= 128);
     pbData = malloc( cbData );
 
-    _CPROVER_assume(pbData != NULL);
+    __CPROVER_assume(pbData != NULL);
 
     SymCryptMd4( pbData, cbData, abResult );
 
     free(pbData);
+}
+
+VOID
+SYMCRYPT_CALL
+SymCryptWipeAsm( _Out_writes_bytes_( cbData ) PVOID pbData, SIZE_T cbData )
+{
+    volatile BYTE * p = (volatile BYTE *) pbData;
+    SIZE_T i;
+
+    __CPROVER_assume( pbData != NULL );
+    __CPROVER_assume( __CPROVER_w_ok( pbData, cbData ) );
+    
+
+    for( i=0; i<cbData; i++ )
+    __CPROVER_assigns( __CPROVER_typed_target(i), __CPROVER_typed_target(p[i]) )
+    __CPROVER_loop_invariant( 0 <= i && i < cbData )
+    __CPROVER_decreases( cbData - i ) 
+    {
+        p[i] = 0;
+    }
+
 }

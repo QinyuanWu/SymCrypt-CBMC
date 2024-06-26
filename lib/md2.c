@@ -182,10 +182,12 @@ SymCryptMd2AppendBlocks(
 
         t = 0;
         for( j=0; j<18; j++ )
+        __CPROVER_assigns(__CPROVER_typed_target(t))
         __CPROVER_loop_invariant(0 <= j < 18)
         __CPROVER_decreases(18 - j)
         {
             for( k=0; k<48; k++ )
+            __CPROVER_assigns(__CPROVER_typed_target(t), __CPROVER_typed_target(pChain->X[k]))
             __CPROVER_loop_invariant(0 <= k < 48)
             __CPROVER_decreases(48 - k)
             {
