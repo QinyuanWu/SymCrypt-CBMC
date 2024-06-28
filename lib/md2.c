@@ -171,6 +171,9 @@ SymCryptMd2AppendBlocks(
         L = pChain->C[15];
 
         for( j=0; j<16; j++ )
+        __CPROVER_assigns(__CPROVER_typed_target(j), __CPROVER_typed_target(L), __CPROVER_object_whole(pChain->C))
+        __CPROVER_loop_invariant(0 <= j <= 16)
+        __CPROVER_decreases(18 - j)
         {
             pChain->C[j] = L = pChain->C[j] ^  SymCryptMd2STable[ L ^ pChain->X[16+j] ];
         }
@@ -183,12 +186,12 @@ SymCryptMd2AppendBlocks(
         t = 0;
         for( j=0; j<18; j++ )
         __CPROVER_assigns(__CPROVER_typed_target(t))
-        __CPROVER_loop_invariant(0 <= j < 18)
+        __CPROVER_loop_invariant(0 <= j <= 18)
         __CPROVER_decreases(18 - j)
         {
             for( k=0; k<48; k++ )
-            __CPROVER_assigns(__CPROVER_typed_target(t), __CPROVER_typed_target(pChain->X[k]))
-            __CPROVER_loop_invariant(0 <= k < 48)
+            __CPROVER_assigns(__CPROVER_typed_target(t), __CPROVER_typed_target(k), __CPROVER_object_whole(pChain->X))
+            __CPROVER_loop_invariant(0 <= k <= 48)
             __CPROVER_decreases(48 - k)
             {
                 t = pChain->X[k] ^ SymCryptMd2STable[t];

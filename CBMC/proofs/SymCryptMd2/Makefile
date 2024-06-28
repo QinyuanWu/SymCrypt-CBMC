@@ -16,9 +16,9 @@ PROJECT_SOURCES += $(SRCDIR)/lib/md2.c
 PROJECT_SOURCES += $(SRCDIR)/lib/env_linuxUserMode.c
 PROJECT_SOURCES += $(SRCDIR)/lib/libmain.c
 PROJECT_SOURCES += $(SRCDIR)/lib/hash.c
-PROOF_SOURCES += $(PROOF_STUB)/memcpy_override.c
+#PROOF_SOURCES += $(PROOF_STUB)/memcpy_override.c
 
-CBMC_DEFAULT_UNWIND ?= --unwind 48
+CBMC_DEFAULT_UNWIND ?= --unwind 1
 CBMC_FLAG_MALLOC_MAY_FAIL ?= 
 CBMC_FLAG_MALLOC_FAIL_NULL ?= 
 CBMC_FLAG_BOUNDS_CHECK ?= --bounds-check

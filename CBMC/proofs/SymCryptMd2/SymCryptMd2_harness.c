@@ -47,13 +47,14 @@ SymCryptWipeAsm( _Out_writes_bytes_( cbData ) PVOID pbData, SIZE_T cbData )
     volatile BYTE * p = (volatile BYTE *) pbData;
     SIZE_T i;
 
-    __CPROVER_assume( pbData != NULL );
-    __CPROVER_assume( __CPROVER_w_ok( pbData, cbData ));
+    //__CPROVER_assume( pbData != NULL );
+    //__CPROVER_assume( __CPROVER_w_ok( pbData, cbData ));
     
 
     for( i=0; i<cbData; i++ )
-    __CPROVER_assigns( __CPROVER_typed_target(i), __CPROVER_typed_target(p[i]) )
-    __CPROVER_loop_invariant( 0 <= i && i < cbData )
+    __CPROVER_assigns( __CPROVER_typed_target(i), __CPROVER_object_upto(p, cbData) )
+    __CPROVER_loop_invariant( i <= cbData )
+    //__CPROVER_loop_invariant(__CPROVER_forall { size_t j; (0 <= j && j < i) ==> p[j] == 0 } )
     __CPROVER_decreases( cbData - i ) 
     {
         p[i] = 0;

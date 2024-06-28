@@ -37,6 +37,11 @@ CBMC_FLAG_SIGNED_OVERFLOW_CHECK =
 CBMC_FLAG_UNDEFINED_SHIFT_CHECK ?= --undefined-shift-check
 CBMC_FLAG_UNSIGNED_OVERFLOW_CHECK =
 CBMC_FLAG_UNWINDING_ASSERTIONS ?= --unwinding-assertions
+CBMC_DEFAULT_UNWIND ?= --unwind 16
+
+USE_DYNAMIC_FRAMES ?= --dfcc
+APPLY_LOOP_CONTRACTS ?= --apply-loop-contracts
+#USE_EXTERNAL_SAT_SOLVER = --smt2
 # Preprocessor include paths -I...
 # Consider adding
      INCLUDES += -I$(SRCDIR)/inc
