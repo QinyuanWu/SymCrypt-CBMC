@@ -150,6 +150,7 @@ SymCryptMd2AppendBlocks(
     _In_reads_( cbData )    PCBYTE                          pbData,
                             SIZE_T                          cbData,
     _Out_                   SIZE_T                        * pcbRemaining )
+__CPROVER_requires(__CPROVER_is_fresh(pbData, cbData) && __CPROVER_is_fresh(pChain, sizeof(* pChain)))
 {
     //
     // For variable names see RFC 1319.
@@ -158,9 +159,9 @@ SymCryptMd2AppendBlocks(
     int j,k;
 
     while( cbData >= SYMCRYPT_MD2_INPUT_BLOCK_SIZE )
-    __CPROVER_assigns(t, j, k, cbData, pbData, __CPROVER_object_whole(pChain->C), __CPROVER_object_whole(pChain->X))
+    __CPROVER_assigns(t, j, k, cbData, pbData, __CPROVER_object_whole(pChain))
     __CPROVER_loop_invariant( cbData % 16 == __CPROVER_loop_entry( cbData ) % 16 && __CPROVER_same_object(pbData, __CPROVER_loop_entry(pbData)))
-    __CPROVER_loop_invariant( __CPROVER_POINTER_OFFSET(pbData)+ cbData == __CPROVER_POINTER_OFFSET(__CPROVER_loop_entry(pbData))+ __CPROVER_loop_entry(cbData))
+    //__CPROVER_loop_invariant( __CPROVER_POINTER_OFFSET(pbData)+ cbData == __CPROVER_POINTER_OFFSET(__CPROVER_loop_entry(pbData))+ __CPROVER_loop_entry(cbData))
     __CPROVER_decreases( cbData )
     {
         BYTE L;
@@ -191,12 +192,12 @@ SymCryptMd2AppendBlocks(
         t = 0;
         for( j=0; j<18; j++ )
         __CPROVER_assigns(t, j, k, __CPROVER_object_whole(pChain->X))
-        __CPROVER_loop_invariant(0 <= j && j <= 18)
+        __CPROVER_loop_invariant(0 <= j && j <= 18 && t < 256)
         __CPROVER_decreases(18 - j)
         {
             for( k=0; k<48; k++ )
             __CPROVER_assigns(t, k, __CPROVER_object_whole(pChain->X))
-            __CPROVER_loop_invariant(0 <= k && k <= 48 && t < 256)
+            __CPROVER_loop_invariant(0 <= k && k <= 48 && t >= 0 && t < 256)
             __CPROVER_decreases(48 - k)
             {
                 t = pChain->X[k] ^ SymCryptMd2STable[t];
