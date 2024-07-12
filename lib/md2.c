@@ -116,7 +116,8 @@ SymCryptMd2Result(  _Inout_                                 PSYMCRYPT_MD2_STATE 
     //
     // The buffer is never completely full, so it is easy to compute the actual padding.
     //
-    SIZE_T tmp;
+    SIZE_T tmp; 
+    __CPROVER_assert(state->bytesInBuffer <= 16, "hash buffer length should always <= 16");
     SIZE_T paddingBytes = 16 - state->bytesInBuffer;
 
 
@@ -157,6 +158,10 @@ SymCryptMd2AppendBlocks(
     int j,k;
 
     while( cbData >= SYMCRYPT_MD2_INPUT_BLOCK_SIZE )
+    __CPROVER_assigns(t, j, k, cbData, pbData, __CPROVER_object_whole(pChain->C), __CPROVER_object_whole(pChain->X))
+    __CPROVER_loop_invariant( cbData % 16 == __CPROVER_loop_entry( cbData ) % 16 && __CPROVER_same_object(pbData, __CPROVER_loop_entry(pbData)))
+    __CPROVER_loop_invariant( __CPROVER_POINTER_OFFSET(pbData)+ cbData == __CPROVER_POINTER_OFFSET(__CPROVER_loop_entry(pbData))+ __CPROVER_loop_entry(cbData))
+    __CPROVER_decreases( cbData )
     {
         BYTE L;
         //
@@ -171,8 +176,8 @@ SymCryptMd2AppendBlocks(
         L = pChain->C[15];
 
         for( j=0; j<16; j++ )
-        __CPROVER_assigns(__CPROVER_typed_target(j), __CPROVER_typed_target(L), __CPROVER_object_whole(pChain->C))
-        __CPROVER_loop_invariant(0 <= j <= 16)
+        __CPROVER_assigns(j, L, __CPROVER_object_whole(pChain->C))
+        __CPROVER_loop_invariant(0 <= j && j <= 16)
         __CPROVER_decreases(18 - j)
         {
             pChain->C[j] = L = pChain->C[j] ^  SymCryptMd2STable[ L ^ pChain->X[16+j] ];
@@ -185,13 +190,13 @@ SymCryptMd2AppendBlocks(
 
         t = 0;
         for( j=0; j<18; j++ )
-        __CPROVER_assigns(__CPROVER_typed_target(t))
-        __CPROVER_loop_invariant(0 <= j <= 18)
+        __CPROVER_assigns(t, j, k, __CPROVER_object_whole(pChain->X))
+        __CPROVER_loop_invariant(0 <= j && j <= 18)
         __CPROVER_decreases(18 - j)
         {
             for( k=0; k<48; k++ )
-            __CPROVER_assigns(__CPROVER_typed_target(t), __CPROVER_typed_target(k), __CPROVER_object_whole(pChain->X))
-            __CPROVER_loop_invariant(0 <= k <= 48)
+            __CPROVER_assigns(t, k, __CPROVER_object_whole(pChain->X))
+            __CPROVER_loop_invariant(0 <= k && k <= 48 && t < 256)
             __CPROVER_decreases(48 - k)
             {
                 t = pChain->X[k] ^ SymCryptMd2STable[t];

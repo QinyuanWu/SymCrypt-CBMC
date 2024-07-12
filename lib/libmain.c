@@ -207,6 +207,9 @@ SymCryptXorBytes(
     else
     {
         while( cbBytes >= 8 )
+        __CPROVER_assigns(pbResult, pbSrc1, pbSrc2, cbBytes)
+        __CPROVER_loop_invariant( cbBytes >= 0 )
+        __CPROVER_decreases( cbBytes )
         {
             *(UINT64 *)pbResult = *(UINT64 *)pbSrc1 ^ *(UINT64 *)pbSrc2;
             pbSrc1 += 8;
@@ -216,6 +219,9 @@ SymCryptXorBytes(
         }
 
         while( cbBytes > 0 )
+        __CPROVER_assigns(pbResult, pbSrc1, pbSrc2, cbBytes)
+        __CPROVER_loop_invariant( cbBytes >= 0 )
+        __CPROVER_decreases( cbBytes )
         {
             *pbResult = *pbSrc1 ^ *pbSrc2;
             pbResult++;

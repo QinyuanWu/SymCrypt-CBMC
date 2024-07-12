@@ -326,7 +326,7 @@ DEFINES ?=
 # object size to be CBMC_MAX_OBJECT_SIZE.  You are likely to get
 # unexpected results if you try to malloc an object larger than this
 # bound.
-CBMC_OBJECT_BITS ?= 8
+CBMC_OBJECT_BITS ?= 16
 
 # CBMC loop unwinding (Normally set in the proof Makefile)
 #
@@ -435,7 +435,7 @@ CODE_CONTRACTS := $(CHECK_FUNCTION_CONTRACTS)$(USE_FUNCTION_CONTRACTS)$(APPLY_LO
 # Proof writers may also apply function contracts using the Dynamic Frame
 # Condition Checking (DFCC) mode. For more information on DFCC,
 # please see https://diffblue.github.io/cbmc/contracts-dev-spec-dfcc.html.
-USE_DYNAMIC_FRAMES ?= --dfcc
+USE_DYNAMIC_FRAMES ?= 
 ifdef USE_DYNAMIC_FRAMES
   ifneq ($(strip $(USE_DYNAMIC_FRAMES)),)
     CBMC_USE_DYNAMIC_FRAMES := $(CBMC_OPT_CONFIG_LIBRARY) --dfcc $(HARNESS_ENTRY) $(CBMC_CHECK_FUNCTION_CONTRACTS_REC)
@@ -447,7 +447,7 @@ endif
 # contracts are not reusable and thus are checked and used simultaneously.
 # These contracts are also ignored by default, but may be enabled by setting
 # the APPLY_LOOP_CONTRACTS variable.
-APPLY_LOOP_CONTRACTS ?= --apply-loop-contracts
+APPLY_LOOP_CONTRACTS ?= 
 ifdef APPLY_LOOP_CONTRACTS
   ifneq ($(strip $(APPLY_LOOP_CONTRACTS)),)
     CBMC_APPLY_LOOP_CONTRACTS := --apply-loop-contracts

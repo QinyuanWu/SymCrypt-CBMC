@@ -579,6 +579,9 @@ SymCryptSha256AppendBlocks_ul1(
     UINT32 Wt;
 
     while( cbData >= 64 )
+    __CPROVER_assigns( cbData, round, __CPROVER_object_whole( ah ), __CPROVER_object_whole( pChain->H), __CPROVER_object_whole( W ) )
+    __CPROVER_loop_invariant( cbData <= __CPROVER_loop_entry(cbData) )
+    __CPROVER_decreases( cbData )
     {
         ah[7] = pChain->H[0];
         ah[6] = pChain->H[1];
@@ -615,6 +618,9 @@ SymCryptSha256AppendBlocks_ul1(
         // rounds 16 to 64.
         //
         for( round=16; round<64; round += 16 )
+        __CPROVER_assigns( round,  __CPROVER_object_whole( W ) )
+        __CPROVER_loop_invariant( round <= 64 )
+        __CPROVER_decreases( 64 - round )
         {
             FROUND(  0, round );
             FROUND(  1, round );
@@ -686,11 +692,17 @@ SymCryptSha256AppendBlocks_ul2(
     ha[0] = pChain->H[7];
 
     while( cbData >= 64 )
+    __CPROVER_assigns( cbData, A, B, C, D, T, r, __CPROVER_object_whole( buf ), __CPROVER_object_whole( ha ), __CPROVER_object_whole( W ) )
+    __CPROVER_loop_invariant( cbData <= __CPROVER_loop_entry(cbData) )
+    __CPROVER_decreases( cbData )
     {
         //
         // Capture the input into W[0..15]
         //
         for( r=0; r<16; r++ )
+        __CPROVER_assigns( r, __CPROVER_object_whole( W ) )
+        __CPROVER_loop_invariant( r <= 16 )
+        __CPROVER_decreases( 16 - r )
         {
             W[r] = SYMCRYPT_LOAD_MSBFIRST32( &pbData[ 4*r ] );
         }
@@ -702,6 +714,9 @@ SymCryptSha256AppendBlocks_ul2(
         B = W[14];
         D = W[0];
         for( r=16; r<64; r+= 2 )
+        //__CPROVER_assigns( A, B, C, D, T, r, __CPROVER_whole_object( buf ), __CPROVER_whole_object( ha ), __CPROVER_whole_object( W ) )
+        __CPROVER_loop_invariant(r >= 16 && r%2==0 && r <= 64 && A == W[r-1] && B == W[r - 2] && D == W[r - 16])
+        __CPROVER_decreases( 64 - r )
         {
             // Loop invariant: A=W[r-1], B = W[r-2], D = W[r-16]
 
@@ -728,6 +743,9 @@ SymCryptSha256AppendBlocks_ul2(
         D = ha[4];
 
         for( r=0; r<64; r += 4 )
+        //__CPROVER_assigns( A, B, C, D, T, r, __CPROVER_whole_object( buf ), __CPROVER_whole_object( ha ), __CPROVER_whole_object( W ) )
+        __CPROVER_loop_invariant( r <= 64 && r%4 == 0)
+        __CPROVER_decreases( 64 - r )
         {
             //
             // Loop invariant:
