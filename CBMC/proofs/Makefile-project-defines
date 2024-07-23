@@ -42,9 +42,12 @@ CBMC_DEFAULT_UNWIND ?= --unwind 16
 USE_DYNAMIC_FRAMES ?= --dfcc
 APPLY_LOOP_CONTRACTS ?= --apply-loop-contracts
 USE_EXTERNAL_SAT_SOLVER = #--smt2
+
+# replace memcmp with unbounded version
+PROOF_SOURCES += $(PROOF_STUB)/memcmp_override.c
+
 # Preprocessor include paths -I...
-# Consider adding
-     INCLUDES += -I$(SRCDIR)/inc
+INCLUDES += -I$(SRCDIR)/inc
 	 
 # You will want to decide what order that comes in relative to the other
 # include directories in your project.
