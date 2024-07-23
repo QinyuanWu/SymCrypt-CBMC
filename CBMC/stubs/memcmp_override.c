@@ -1,3 +1,5 @@
+// Original CBMC built-in memcmp: https://github.com/diffblue/cbmc/blob/d8296bdde10805b5f78ac3c6e61ccd86d388643e/src/ansi-c/library/string.c#L919
+// This is a stub with loop contract so no unwind bound need to be specified.
 #ifndef __CPROVER_STRING_H_INCLUDED
 #include <string.h>
 #define __CPROVER_STRING_H_INCLUDED
@@ -26,8 +28,10 @@ inline int memcmp(const void *s1, const void *s2, size_t n)
   __CPROVER_loop_invariant(n >= 0 && n <= __CPROVER_loop_entry(n))
   __CPROVER_loop_invariant(__CPROVER_same_object(sc1, __CPROVER_loop_entry(sc1)))
   __CPROVER_loop_invariant(__CPROVER_same_object(sc2, __CPROVER_loop_entry(sc2)))
-  __CPROVER_loop_invariant(__CPROVER_POINTER_OFFSET(sc1) <= __CPROVER_loop_entry(n) && __CPROVER_POINTER_OFFSET(sc2) <= __CPROVER_loop_entry(n))
-  __CPROVER_loop_invariant(sc1 - (const unsigned char*)s1 == sc2 - (const unsigned char*)s2 &&  sc1 - (const unsigned char*)s1 == __CPROVER_loop_entry(n) - n)
+  __CPROVER_loop_invariant(__CPROVER_POINTER_OFFSET(sc1) <= __CPROVER_loop_entry(n) 
+    && __CPROVER_POINTER_OFFSET(sc2) <= __CPROVER_loop_entry(n))
+  __CPROVER_loop_invariant(__CPROVER_POINTER_OFFSET(sc1) == __CPROVER_POINTER_OFFSET(sc2) 
+    && __CPROVER_POINTER_OFFSET(sc1) == __CPROVER_loop_entry(n) - n)
   __CPROVER_decreases(n)
   {
     res = (*sc1++) - (*sc2++);
