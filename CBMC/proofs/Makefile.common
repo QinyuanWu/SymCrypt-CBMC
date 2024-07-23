@@ -513,7 +513,7 @@ COMMA :=,
 ################################################################
 # Set C compiler defines
 
-#CBMCFLAGS += --object-bits $(CBMC_OBJECT_BITS)
+CBMCFLAGS += --object-bits $(CBMC_OBJECT_BITS)
 #COMPILE_FLAGS += --object-bits $(CBMC_OBJECT_BITS)
 
 DEFINES += -DCBMC=1
@@ -816,7 +816,7 @@ ifdef CBMCFLAGS
   ifeq ($(strip $(CODE_CONTRACTS)),)
     CBMCFLAGS += $(CBMC_UNWINDSET) $(CBMC_CPROVER_LIBRARY_UNWINDSET) $(CBMC_DEFAULT_UNWIND) $(CBMC_OPT_CONFIG_LIBRARY)
   else ifeq ($(strip $(USE_DYNAMIC_FRAMES)),)
-    CBMCFLAGS += $(CBMC_CPROVER_LIBRARY_UNWINDSET) $(CBMC_OPT_CONFIG_LIBRARY)
+    CBMCFLAGS += $(CBMC_CPROVER_LIBRARY_UNWINDSET) $(CBMC_OPT_CONFIG_LIBRARY) $(CBMC_DEFAULT_UNWIND)
   endif
 endif
 

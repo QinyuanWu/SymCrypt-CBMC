@@ -19,7 +19,6 @@
 #include <string.h>
 #include "symcrypt.h"
 
-
 SYMCRYPT_ENVIRONMENT_LINUX_USERMODE
 /**
  * @brief Starting point for formal analysis
@@ -27,40 +26,33 @@ SYMCRYPT_ENVIRONMENT_LINUX_USERMODE
  */
 void harness(void)
 {
-    SIZE_T cbData; // unconstrained value
-    PBYTE pbData;
+    SIZE_T cbData1; // unconstrained value
+    SIZE_T cbData2;
+    PBYTE pbData1;
+    PBYTE pbData2;
     BYTE abResult[SYMCRYPT_MD2_RESULT_SIZE];
-    __CPROVER_assume(cbData <= 64);
-    pbData = malloc( cbData );
+    pbData1 = malloc( cbData1 );
+    pbData2 = malloc( cbData2 );
 
-    __CPROVER_assume(pbData != NULL);
+    __CPROVER_assume(pbData1 != NULL);
+    __CPROVER_assume(pbData2 != NULL);
 
-    SymCryptMd2( pbData, cbData, abResult );
+    SYMCRYPT_MD2_STATE state;
 
-    free(pbData);
+    SymCryptMd2Init( &state );
+    SymCryptMd2Append( &state, pbData1, cbData1 );
+    SymCryptMd2Append( &state, pbData2, cbData2 );
+    SymCryptMd2Result( &state, abResult );
+
+    free(pbData1);
+    free(pbData2);
 }
 
-
+// overwrite assembly implementation of SymCryptWipeAsm
 VOID
 SYMCRYPT_CALL
 SymCryptWipeAsm( _Out_writes_bytes_( cbData ) PVOID pbData, SIZE_T cbData )
 {
     volatile BYTE * p = (volatile BYTE *) pbData;
     memset(p, 0, cbData);
-    /*
-    SIZE_T i;
-
-    //__CPROVER_assume( pbData != NULL );
-    //__CPROVER_assume( __CPROVER_w_ok( pbData, cbData ));
-    
-
-    for( i=0; i<cbData; i++ )
-    __CPROVER_assigns( i, __CPROVER_object_upto(p, cbData) )
-    __CPROVER_loop_invariant( i <= cbData )
-    //__CPROVER_loop_invariant(__CPROVER_forall { size_t j; (0 <= j && j < i) ==> p[j] == 0 } )
-    __CPROVER_decreases( cbData - i ) 
-    {
-        p[i] = 0;
-    }
-    */
 }

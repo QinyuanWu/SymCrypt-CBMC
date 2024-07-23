@@ -160,8 +160,9 @@ __CPROVER_requires(__CPROVER_is_fresh(pbData, cbData) && __CPROVER_is_fresh(pCha
 
     while( cbData >= SYMCRYPT_MD2_INPUT_BLOCK_SIZE )
     __CPROVER_assigns(t, j, k, cbData, pbData, __CPROVER_object_whole(pChain))
+    __CPROVER_loop_invariant(cbData <= __CPROVER_loop_entry( cbData ))
     __CPROVER_loop_invariant( cbData % 16 == __CPROVER_loop_entry( cbData ) % 16 && __CPROVER_same_object(pbData, __CPROVER_loop_entry(pbData)))
-    //__CPROVER_loop_invariant( __CPROVER_POINTER_OFFSET(pbData)+ cbData == __CPROVER_POINTER_OFFSET(__CPROVER_loop_entry(pbData))+ __CPROVER_loop_entry(cbData))
+    __CPROVER_loop_invariant( __CPROVER_POINTER_OFFSET(pbData)+ cbData == __CPROVER_POINTER_OFFSET(__CPROVER_loop_entry(pbData))+ __CPROVER_loop_entry(cbData))
     __CPROVER_decreases( cbData )
     {
         BYTE L;

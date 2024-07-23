@@ -1,0 +1,441 @@
+{
+  "viewer-coverage": {
+    "coverage": {
+      "CBMC/proofs/SymCryptMd2/SymCryptMd2_harness.c": {
+        "SymCryptWipeAsm": {
+          "48": "both",
+          "49": "hit",
+          "66": "hit"
+        },
+        "harness": {
+          "30": "hit",
+          "31": "hit",
+          "32": "both",
+          "34": "both",
+          "36": "hit",
+          "38": "hit",
+          "40": "hit",
+          "41": "both"
+        }
+      },
+      "inc/symcrypt_internal.h": {
+        "SymCryptWipeKnownSize": {
+          "2964": "both",
+          "2966": "hit",
+          "2968": "hit",
+          "2969": "hit",
+          "2975": "missed",
+          "2977": "missed",
+          "2978": "missed",
+          "2980": "missed",
+          "2982": "missed",
+          "2983": "missed",
+          "2985": "missed",
+          "2987": "missed",
+          "2988": "missed",
+          "2990": "missed",
+          "2992": "missed",
+          "2993": "missed",
+          "2995": "missed",
+          "2997": "missed",
+          "2998": "missed",
+          "2999": "missed",
+          "3001": "missed",
+          "3003": "missed",
+          "3004": "missed",
+          "3005": "missed",
+          "3006": "missed",
+          "3007": "missed",
+          "3010": "missed",
+          "3012": "missed",
+          "3013": "missed",
+          "3014": "missed",
+          "3015": "missed",
+          "3016": "missed",
+          "3017": "missed",
+          "3018": "missed",
+          "3019": "missed",
+          "3020": "missed",
+          "3024": "hit"
+        }
+      },
+      "lib/hash.c": {
+        "SymCryptHashAppendInternal": {
+          "16": "hit",
+          "17": "hit",
+          "18": "both",
+          "22": "both",
+          "23": "hit",
+          "24": "missed",
+          "27": "both",
+          "32": "hit",
+          "36": "missed",
+          "37": "missed",
+          "49": "missed",
+          "50": "missed",
+          "51": "missed",
+          "52": "missed",
+          "54": "missed",
+          "61": "hit",
+          "63": "both",
+          "65": "both",
+          "66": "both",
+          "74": "hit",
+          "76": "hit",
+          "77": "both",
+          "80": "both",
+          "81": "both"
+        }
+      },
+      "lib/hash_pattern.c": {
+        "SymCryptMd2": {
+          "21": "both",
+          "23": "both",
+          "24": "hit",
+          "25": "hit",
+          "26": "both"
+        }
+      },
+      "lib/libmain.c": {
+        "SymCryptInitEnvCommon": {
+          "61": "hit"
+        },
+        "SymCryptWipe": {
+          "128": "hit",
+          "129": "hit"
+        },
+        "SymCryptXorBytes": {
+          "198": "hit",
+          "200": "hit",
+          "201": "hit",
+          "202": "hit",
+          "204": "hit",
+          "205": "hit",
+          "206": "hit",
+          "209": "missed",
+          "210": "missed",
+          "211": "missed",
+          "212": "missed",
+          "214": "missed",
+          "215": "missed",
+          "216": "missed",
+          "217": "missed",
+          "218": "missed",
+          "221": "missed",
+          "222": "missed",
+          "223": "missed",
+          "224": "missed",
+          "226": "missed",
+          "227": "missed",
+          "228": "missed",
+          "229": "missed",
+          "230": "missed",
+          "233": "hit"
+        }
+      },
+      "lib/md2.c": {
+        "SymCryptMd2Append": {
+          "104": "hit",
+          "105": "hit"
+        },
+        "SymCryptMd2AppendBlocks": {
+          "158": "both",
+          "159": "both",
+          "161": "both",
+          "162": "both",
+          "163": "hit",
+          "164": "hit",
+          "165": "hit",
+          "166": "both",
+          "168": "hit",
+          "172": "hit",
+          "178": "hit",
+          "180": "both",
+          "181": "both",
+          "182": "hit",
+          "183": "both",
+          "185": "hit",
+          "191": "hit",
+          "193": "hit",
+          "194": "both",
+          "195": "both",
+          "196": "hit",
+          "197": "both",
+          "199": "both",
+          "200": "both",
+          "201": "hit",
+          "202": "both",
+          "204": "hit",
+          "205": "hit",
+          "207": "hit",
+          "210": "hit",
+          "211": "hit",
+          "212": "hit",
+          "214": "both",
+          "215": "both"
+        },
+        "SymCryptMd2Init": {
+          "90": "hit",
+          "92": "hit"
+        },
+        "SymCryptMd2Result": {
+          "119": "both",
+          "120": "both",
+          "121": "both",
+          "126": "hit",
+          "128": "hit",
+          "133": "hit",
+          "135": "hit",
+          "142": "hit",
+          "143": "both"
+        }
+      }
+    },
+    "function_coverage": {
+      "CBMC/proofs/SymCryptMd2/SymCryptMd2_harness.c": {
+        "SymCryptWipeAsm": {
+          "hit": 3,
+          "percentage": 1.0,
+          "total": 3
+        },
+        "harness": {
+          "hit": 8,
+          "percentage": 1.0,
+          "total": 8
+        }
+      },
+      "inc/symcrypt_internal.h": {
+        "SymCryptWipeKnownSize": {
+          "hit": 5,
+          "percentage": 0.13513513513513514,
+          "total": 37
+        }
+      },
+      "lib/hash.c": {
+        "SymCryptHashAppendInternal": {
+          "hit": 16,
+          "percentage": 0.6666666666666666,
+          "total": 24
+        }
+      },
+      "lib/hash_pattern.c": {
+        "SymCryptMd2": {
+          "hit": 5,
+          "percentage": 1.0,
+          "total": 5
+        }
+      },
+      "lib/libmain.c": {
+        "SymCryptInitEnvCommon": {
+          "hit": 1,
+          "percentage": 1.0,
+          "total": 1
+        },
+        "SymCryptWipe": {
+          "hit": 2,
+          "percentage": 1.0,
+          "total": 2
+        },
+        "SymCryptXorBytes": {
+          "hit": 8,
+          "percentage": 0.3076923076923077,
+          "total": 26
+        }
+      },
+      "lib/md2.c": {
+        "SymCryptMd2Append": {
+          "hit": 2,
+          "percentage": 1.0,
+          "total": 2
+        },
+        "SymCryptMd2AppendBlocks": {
+          "hit": 34,
+          "percentage": 1.0,
+          "total": 34
+        },
+        "SymCryptMd2Init": {
+          "hit": 2,
+          "percentage": 1.0,
+          "total": 2
+        },
+        "SymCryptMd2Result": {
+          "hit": 9,
+          "percentage": 1.0,
+          "total": 9
+        }
+      }
+    },
+    "line_coverage": {
+      "CBMC/proofs/SymCryptMd2/SymCryptMd2_harness.c": {
+        "30": "hit",
+        "31": "hit",
+        "32": "both",
+        "34": "both",
+        "36": "hit",
+        "38": "hit",
+        "40": "hit",
+        "41": "both",
+        "48": "both",
+        "49": "hit",
+        "66": "hit"
+      },
+      "inc/symcrypt_internal.h": {
+        "2964": "both",
+        "2966": "hit",
+        "2968": "hit",
+        "2969": "hit",
+        "2975": "missed",
+        "2977": "missed",
+        "2978": "missed",
+        "2980": "missed",
+        "2982": "missed",
+        "2983": "missed",
+        "2985": "missed",
+        "2987": "missed",
+        "2988": "missed",
+        "2990": "missed",
+        "2992": "missed",
+        "2993": "missed",
+        "2995": "missed",
+        "2997": "missed",
+        "2998": "missed",
+        "2999": "missed",
+        "3001": "missed",
+        "3003": "missed",
+        "3004": "missed",
+        "3005": "missed",
+        "3006": "missed",
+        "3007": "missed",
+        "3010": "missed",
+        "3012": "missed",
+        "3013": "missed",
+        "3014": "missed",
+        "3015": "missed",
+        "3016": "missed",
+        "3017": "missed",
+        "3018": "missed",
+        "3019": "missed",
+        "3020": "missed",
+        "3024": "hit"
+      },
+      "lib/hash.c": {
+        "16": "hit",
+        "17": "hit",
+        "18": "both",
+        "22": "both",
+        "23": "hit",
+        "24": "missed",
+        "27": "both",
+        "32": "hit",
+        "36": "missed",
+        "37": "missed",
+        "49": "missed",
+        "50": "missed",
+        "51": "missed",
+        "52": "missed",
+        "54": "missed",
+        "61": "hit",
+        "63": "both",
+        "65": "both",
+        "66": "both",
+        "74": "hit",
+        "76": "hit",
+        "77": "both",
+        "80": "both",
+        "81": "both"
+      },
+      "lib/hash_pattern.c": {
+        "21": "both",
+        "23": "both",
+        "24": "hit",
+        "25": "hit",
+        "26": "both"
+      },
+      "lib/libmain.c": {
+        "61": "hit",
+        "128": "hit",
+        "129": "hit",
+        "198": "hit",
+        "200": "hit",
+        "201": "hit",
+        "202": "hit",
+        "204": "hit",
+        "205": "hit",
+        "206": "hit",
+        "209": "missed",
+        "210": "missed",
+        "211": "missed",
+        "212": "missed",
+        "214": "missed",
+        "215": "missed",
+        "216": "missed",
+        "217": "missed",
+        "218": "missed",
+        "221": "missed",
+        "222": "missed",
+        "223": "missed",
+        "224": "missed",
+        "226": "missed",
+        "227": "missed",
+        "228": "missed",
+        "229": "missed",
+        "230": "missed",
+        "233": "hit"
+      },
+      "lib/md2.c": {
+        "90": "hit",
+        "92": "hit",
+        "104": "hit",
+        "105": "hit",
+        "119": "both",
+        "120": "both",
+        "121": "both",
+        "126": "hit",
+        "128": "hit",
+        "133": "hit",
+        "135": "hit",
+        "142": "hit",
+        "143": "both",
+        "158": "both",
+        "159": "both",
+        "161": "both",
+        "162": "both",
+        "163": "hit",
+        "164": "hit",
+        "165": "hit",
+        "166": "both",
+        "168": "hit",
+        "172": "hit",
+        "178": "hit",
+        "180": "both",
+        "181": "both",
+        "182": "hit",
+        "183": "both",
+        "185": "hit",
+        "191": "hit",
+        "193": "hit",
+        "194": "both",
+        "195": "both",
+        "196": "hit",
+        "197": "both",
+        "199": "both",
+        "200": "both",
+        "201": "hit",
+        "202": "both",
+        "204": "hit",
+        "205": "hit",
+        "207": "hit",
+        "210": "hit",
+        "211": "hit",
+        "212": "hit",
+        "214": "both",
+        "215": "both"
+      }
+    },
+    "overall_coverage": {
+      "hit": 95,
+      "percentage": 0.6209150326797386,
+      "total": 153
+    }
+  }
+}
