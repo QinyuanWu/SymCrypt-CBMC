@@ -1,8 +1,9 @@
 # Emitted when running CBMC proofs
 proofs/**/logs
 proofs/**/gotos
-proofs/**/report
+proofs/**/report*
 proofs/**/html
+proofs/**/debug*
 proofs/output
 
 # Emitted by CBMC Viewer
