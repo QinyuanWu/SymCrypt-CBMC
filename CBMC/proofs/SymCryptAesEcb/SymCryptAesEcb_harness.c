@@ -35,6 +35,7 @@ void harness(void)
     __CPROVER_assume(pbKey != NULL);
     PSYMCRYPT_AES_EXPANDED_KEY pExpandedKey;
     pExpandedKey = malloc(SYMCRYPT_AES_EXPANDED_KEY_SIZE);
+    __CPROVER_assume(pExpandedKey != NULL);
     SymCryptAesExpandKey( pExpandedKey, pbKey, cbKey );
     free(pbKey);
     free(pExpandedKey);

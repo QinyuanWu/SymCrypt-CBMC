@@ -41,7 +41,8 @@ CBMC_FLAG_SIGNED_OVERFLOW_CHECK ?=
 CBMC_FLAG_UNDEFINED_SHIFT_CHECK ?=
 CBMC_FLAG_UNSIGNED_OVERFLOW_CHECK =
 CBMC_FLAG_UNWINDING_ASSERTIONS ?= --unwinding-assertions
-CBMC_DEFAULT_UNWIND ?= --unwind 10
+CBMC_DEFAULT_UNWIND ?= --unwind 25
+CBMC_OBJECT_BITS ?= 9
 # If you require access to a file-local ("static") function or object to conduct
 # your proof, set the following (and do not include the original source file
 # ("lib/aes-c.c") in PROJECT_SOURCES).
