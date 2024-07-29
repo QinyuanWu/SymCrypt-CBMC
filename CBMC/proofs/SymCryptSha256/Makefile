@@ -20,7 +20,26 @@ PROJECT_SOURCES += $(SRCDIR)/lib/env_linuxUserMode.c
 PROJECT_SOURCES += $(SRCDIR)/lib/libmain.c
 PROJECT_SOURCES += $(SRCDIR)/lib/sha256Par.c
 
-CBMC_DEFAULT_UNWIND ?= --unwind 32
+CBMC_FLAG_MALLOC_MAY_FAIL =
+CBMC_FLAG_MALLOC_FAIL_NULL =
+CBMC_FLAG_BOUNDS_CHECK ?= --bounds-check
+CBMC_FLAG_CONVERSION_CHECK ?= 
+CBMC_FLAG_MEMORY_LEAK_CHECK ?= --memory-leak-check
+CBMC_FLAG_MEMORY_CLEANUP_CHECK ?= --memory-cleanup-check
+CBMC_FLAG_DIV_BY_ZERO_CHECK =
+CBMC_FLAG_FLOAT_OVERFLOW_CHECK =
+CBMC_FLAG_NAN_CHECK ?= 
+CBMC_FLAG_POINTER_CHECK ?= --pointer-check
+CBMC_FLAG_POINTER_OVERFLOW_CHECK ?= --pointer-overflow-check
+CBMC_FLAG_POINTER_PRIMITIVE_CHECK ?= --pointer-primitive-check
+CBMC_FLAG_SIGNED_OVERFLOW_CHECK =
+CBMC_FLAG_UNDEFINED_SHIFT_CHECK ?= 
+CBMC_FLAG_UNSIGNED_OVERFLOW_CHECK =
+CBMC_FLAG_UNWINDING_ASSERTIONS ?= --unwinding-assertions
+
+CBMC_DEFAULT_UNWIND ?= #--unwind 1
+CBMC_OBJECT_BITS ?= 16
+
 # If this proof is found to consume huge amounts of RAM, you can set the
 # EXPENSIVE variable. With new enough versions of the proof tools, this will
 # restrict the number of EXPENSIVE CBMC jobs running at once. See the

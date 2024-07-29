@@ -16,6 +16,7 @@
  *   - include the types needed to declare function arguments
  */
 #include <stdlib.h>
+#include <string.h>
 #include "symcrypt.h"
 
 /**
@@ -30,7 +31,7 @@ void harness(void)
     PBYTE pbData;
     BYTE abResult[SYMCRYPT_SHA256_RESULT_SIZE];
 
-    __CPROVER_assume(cbData <= 1024);
+    //__CPROVER_assume(cbData <= 128);
     pbData = malloc( cbData );
 
     __CPROVER_assume(pbData != NULL);
@@ -44,18 +45,22 @@ VOID
 SYMCRYPT_CALL
 SymCryptWipeAsm( _Out_writes_bytes_( cbData ) PVOID pbData, SIZE_T cbData )
 {
-    volatile BYTE * p = (volatile BYTE *) pbData;
+    //volatile BYTE * p = (volatile BYTE *) pbData;
+    memset(pbData, 0, cbData);
+    /*
     SIZE_T i;
 
-    __CPROVER_assume( pbData != NULL );
-    __CPROVER_assume( __CPROVER_w_ok( pbData, cbData ) );
+    //__CPROVER_assume( pbData != NULL );
+    //__CPROVER_assume( __CPROVER_w_ok( pbData, cbData ));
     
 
     for( i=0; i<cbData; i++ )
-    __CPROVER_loop_invariant( 0 <= i && i < cbData )
-    __CPROVER_decreases( cbData - i )
+    __CPROVER_assigns( i, __CPROVER_object_upto(p, cbData) )
+    __CPROVER_loop_invariant( i <= cbData )
+    //__CPROVER_loop_invariant(__CPROVER_forall { size_t j; (0 <= j && j < i) ==> p[j] == 0 } )
+    __CPROVER_decreases( cbData - i ) 
     {
         p[i] = 0;
     }
-
+    */
 }
