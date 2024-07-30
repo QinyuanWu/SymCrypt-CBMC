@@ -25,4 +25,10 @@
             "overrideName": true,
         }
     },
+    "vscode-nmake-tools.workspaceBuildDirectories": [],
+    "files.associations": {
+        "chrono": "c",
+        "cmath": "c",
+        "random": "c"
+    },
 }
