@@ -248,9 +248,11 @@ SymCryptMd4AppendBlocks(
     ad[3] = pChain->H[1];
 
     while( cbData >= 64 )
-    __CPROVER_loop_invariant(cbData <= __CPROVER_loop_entry(cbData))
-    __CPROVER_loop_invariant(pbData + cbData == __CPROVER_loop_entry(pbData) + __CPROVER_loop_entry(cbData))
-    __CPROVER_decreases(cbData)
+    __CPROVER_assigns(cbData, pbData, Wt, __CPROVER_object_whole(pChain), __CPROVER_object_whole(ad), __CPROVER_object_whole(W))
+    __CPROVER_loop_invariant(cbData <= __CPROVER_loop_entry( cbData ))
+    __CPROVER_loop_invariant( cbData % 64 == __CPROVER_loop_entry( cbData ) % 64 && __CPROVER_same_object(pbData, __CPROVER_loop_entry(pbData)))
+    __CPROVER_loop_invariant( __CPROVER_POINTER_OFFSET(pbData)+ cbData == __CPROVER_POINTER_OFFSET(__CPROVER_loop_entry(pbData))+ __CPROVER_loop_entry(cbData))
+    __CPROVER_decreases( cbData )
     {
         //
         // initial rounds 1 to 16
