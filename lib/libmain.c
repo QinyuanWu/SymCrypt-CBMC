@@ -385,6 +385,9 @@ SymCryptLoadLsbFirstUint64(
     v = 0;
     pbSrc += cbSrc;
     while( cbSrc > 8 )
+    __CPROVER_assigns(cbSrc, scError)
+    __CPROVER_loop_invariant(cbSrc <= __CPROVER_loop_entry(cbSrc))
+    __CPROVER_decreases(cbSrc)
     {
         if( *--pbSrc != 0 )
         {
@@ -395,6 +398,9 @@ SymCryptLoadLsbFirstUint64(
     }
 
     while( cbSrc > 0 )
+    __CPROVER_assigns(cbSrc, v)
+    __CPROVER_loop_invariant(cbSrc <= __CPROVER_loop_entry(cbSrc))
+    __CPROVER_decreases(cbSrc)
     {
         v = (v << 8) | *--pbSrc;
         cbSrc--;
@@ -449,6 +455,9 @@ SymCryptLoadMsbFirstUint64(
 
     v = 0;
     while( cbSrc > 8 )
+    __CPROVER_assigns(cbSrc, v)
+    __CPROVER_loop_invariant(cbSrc >= 8 && cbSrc <= __CPROVER_loop_entry(cbSrc))
+    __CPROVER_decreases(cbSrc)
     {
         if( *pbSrc++ != 0 )
         {
@@ -459,6 +468,9 @@ SymCryptLoadMsbFirstUint64(
     }
 
     while( cbSrc > 0 )
+    __CPROVER_assigns(cbSrc, v)
+    __CPROVER_loop_invariant(cbSrc >= 0 && cbSrc <= __CPROVER_loop_entry(cbSrc))
+    __CPROVER_decreases(cbSrc)
     {
         v = (v << 8) | *pbSrc++;
         cbSrc--;
@@ -491,6 +503,9 @@ SymCryptStoreLsbFirstUint64(
     SYMCRYPT_ERROR scError = SYMCRYPT_NO_ERROR;
 
     while( cbDst > 0 )
+    __CPROVER_assigns(cbDst, pbDst)
+    __CPROVER_loop_invariant(cbDst <= __CPROVER_loop_entry(cbDst))
+    __CPROVER_decreases(cbDst)
     {
         *pbDst++ = (BYTE) src;
         src >>= 8;
@@ -528,6 +543,9 @@ SymCryptStoreMsbFirstUint64(
 
     pbDst += cbDst;
     while( cbDst > 0 )
+    __CPROVER_assigns(cbDst, pbDst, src)
+    __CPROVER_loop_invariant(cbDst >= 0 && cbDst <= __CPROVER_loop_entry(cbDst))
+    __CPROVER_decreases(cbDst)
     {
         *--pbDst = (BYTE) src;
         src >>= 8;
