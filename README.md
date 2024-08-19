@@ -1,5 +1,10 @@
 # Introduction
-SymCrypt is the core cryptographic function library currently used by Windows.
+SymCrypt is the core cryptographic function library currently used by Windows. This version contains formal verification work in the [CBMC](https://github.com/QinyuanWu/SymCrypt-CBMC/tree/main/CBMC) folder. Function and loop contracts are annotated directly on the relevant source code.
+
+# CBMC
+To learn more about CBMC and proofs specifically, review the [CBMC training material](https://model-checking.github.io/cbmc-training/) and [CPROVER documentation](https://diffblue.github.io/cbmc/cprover_documentation.html).
+The `cbmc/proofs` directory contains CBMC proofs.
+In order to run these proofs you will need to install CBMC and other tools by following the instructions [here](https://model-checking.github.io/cbmc-training/installation.html).
 
 ## History
 The library was started in late 2006 with the first sources committed in Feb 2007.
@@ -76,5 +81,4 @@ By restricting the coding to a handful of employees we can greatly reduce the (p
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
-
 
